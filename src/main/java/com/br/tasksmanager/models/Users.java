@@ -3,13 +3,19 @@ package com.br.tasksmanager.models;
 import com.br.tasksmanager.Enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Getter
-@Setter
-public class Users {
+@NoArgsConstructor
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,5 +32,30 @@ public class Users {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    public Users(String username, String password, String email, UserRole role){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN){
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
 
 }
