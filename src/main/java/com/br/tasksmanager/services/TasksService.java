@@ -1,5 +1,6 @@
 package com.br.tasksmanager.services;
 
+import com.br.tasksmanager.Enums.TaskStatus;
 import com.br.tasksmanager.dtos.Tasks.*;
 import com.br.tasksmanager.exceptions.BadRequestException;
 import com.br.tasksmanager.models.Tasks;
@@ -21,6 +22,11 @@ public class TasksService {
     private final TasksRepository tasksRepository;
     private final UserRepository userRepository;
 
+    public Tasks getById(UUID id){
+        return tasksRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Task not found"));
+    }
+
     public List<Tasks> listAllByUserId(Long id){
         return tasksRepository.findAllByUserId(id);
     }
@@ -41,7 +47,6 @@ public class TasksService {
 
         return tasksRepository.save(task);
     }
-
 
     //updates
     private Tasks checkUserAndGetTasks(Long userId, UUID taskId) {
@@ -85,6 +90,14 @@ public class TasksService {
         Tasks task = checkUserAndGetTasks(userId, taskId);
         task.setUpdateAt(LocalDateTime.now());
         task.setStatus(statusDto.status());
+        tasksRepository.save(task);
+    }
+
+    @Transactional
+    public void completeTask(Long userId, UUID taskId){
+        Tasks task = checkUserAndGetTasks(userId, taskId);
+        task.setStatus(TaskStatus.COMPLETED);
+        task.setUpdateAt(LocalDateTime.now());
         tasksRepository.save(task);
     }
 

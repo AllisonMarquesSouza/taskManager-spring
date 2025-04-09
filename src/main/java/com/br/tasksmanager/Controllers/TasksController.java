@@ -18,6 +18,11 @@ import java.util.UUID;
 public class TasksController {
     private final TasksService tasksService;
 
+    @GetMapping("/getById/{taskId}")
+    public ResponseEntity<Tasks> getById(@PathVariable("taskId") UUID id){
+        return ResponseEntity.ok(tasksService.getById(id));
+    }
+
     @GetMapping("/listAll/{userId}")
     public ResponseEntity<List<Tasks>> listAllByUserId(@PathVariable("userId") Long userId  ){
         return ResponseEntity.ok(tasksService.listAllByUserId(userId));
@@ -62,6 +67,12 @@ public class TasksController {
     public ResponseEntity<Void> updateStatus(@PathVariable("userId") Long userId, @PathVariable("taskId") UUID taskId,
                                            @RequestBody @Valid UpdateStatusDto statusDto){
         tasksService.updateStatus(userId, taskId, statusDto);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/completeTask/{userId}/{taskId}")
+    public ResponseEntity<Void> completeTask(@PathVariable("userId") Long userId, @PathVariable("taskId") UUID taskId){
+        tasksService.completeTask(userId, taskId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
