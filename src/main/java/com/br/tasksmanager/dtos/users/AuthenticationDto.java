@@ -1,4 +1,4 @@
-package com.br.tasksmanager.dtos;
+package com.br.tasksmanager.dtos.users;
 
 import jakarta.validation.constraints.NotBlank;
 

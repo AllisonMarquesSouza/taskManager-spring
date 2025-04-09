@@ -2,9 +2,9 @@ package com.br.tasksmanager.services;
 
 import com.br.tasksmanager.Enums.UserRole;
 import com.br.tasksmanager.config.JWTService;
-import com.br.tasksmanager.dtos.AuthenticationDto;
-import com.br.tasksmanager.dtos.RegisterDto;
-import com.br.tasksmanager.dtos.TokenDto;
+import com.br.tasksmanager.dtos.users.AuthenticationDto;
+import com.br.tasksmanager.dtos.users.RegisterDto;
+import com.br.tasksmanager.dtos.users.TokenDto;
 import com.br.tasksmanager.exceptions.BadRequestException;
 import com.br.tasksmanager.models.Users;
 import com.br.tasksmanager.repositories.UserRepository;
