@@ -7,7 +7,7 @@ import com.br.tasksmanager.dtos.users.RegisterDto;
 import com.br.tasksmanager.dtos.users.TokenDto;
 import com.br.tasksmanager.exceptions.BadRequestException;
 import com.br.tasksmanager.models.Users;
-import com.br.tasksmanager.repositories.UserRepository;
+import com.br.tasksmanager.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,13 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
     private final ApplicationContext context;
     private final JWTService jwtService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return usersRepository.findByUsername(username);
     }
 
     public TokenDto login(AuthenticationDto authDto){
@@ -46,15 +46,15 @@ public class AuthenticationService implements UserDetailsService {
 
     @Transactional
     public Users register(RegisterDto data){
-        if(userRepository.existsByUsername(data.username())){
+        if(usersRepository.existsByUsername(data.username())){
             throw new BadRequestException("Username already exist, check it ");
         }
-        if(userRepository.existsByEmail(data.email())){
+        if(usersRepository.existsByEmail(data.email())){
             throw new BadRequestException("Email already exist, check it");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         Users user = new Users(data.username(), encryptedPassword, data.email(), UserRole.ADMIN);
-        return userRepository.save(user);
+        return usersRepository.save(user);
     }
 }

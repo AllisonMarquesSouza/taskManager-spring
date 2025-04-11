@@ -1,13 +1,12 @@
 package com.br.tasksmanager.config;
 
 
-import com.br.tasksmanager.repositories.UserRepository;
+import com.br.tasksmanager.repositories.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,14 +19,14 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class SecurityFilter extends OncePerRequestFilter {
     private final JWTService tokenService;
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
          var token = this.recoverToken(request);
          if(token != null){
              var subject = tokenService.validateToken(token);
-             UserDetails user = userRepository.findByUsername(subject);
+             UserDetails user = usersRepository.findByUsername(subject);
              var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
              SecurityContextHolder.getContext().setAuthentication(authentication);
          }

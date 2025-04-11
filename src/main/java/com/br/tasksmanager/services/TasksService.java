@@ -6,7 +6,7 @@ import com.br.tasksmanager.exceptions.BadRequestException;
 import com.br.tasksmanager.models.Tasks;
 import com.br.tasksmanager.models.Users;
 import com.br.tasksmanager.repositories.TasksRepository;
-import com.br.tasksmanager.repositories.UserRepository;
+import com.br.tasksmanager.repositories.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TasksService {
     private final TasksRepository tasksRepository;
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
     public Tasks getById(UUID id){
         return tasksRepository.findById(id)
@@ -38,7 +38,7 @@ public class TasksService {
 
     @Transactional
     public Tasks create(TaskRequestDto taskRequestDto){
-        Users user = userRepository.findById(taskRequestDto.userId())
+        Users user = usersRepository.findById(taskRequestDto.userId())
                 .orElseThrow(() -> new EntityNotFoundException("User doesn't exist, check it"));
 
         Tasks task = new Tasks(user, taskRequestDto);
@@ -50,11 +50,10 @@ public class TasksService {
 
     //updates
     private Tasks checkUserAndGetTasks(Long userId, UUID taskId) {
-        userRepository.findById(userId)
+        usersRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User doesn't exist, check it"));
         Tasks task = tasksRepository.findById(taskId)
                 .orElseThrow(() -> new EntityNotFoundException("Task doesn't exist"));
-
         if(!tasksRepository.existsByUserIdAndId(userId, taskId)){
             throw new BadRequestException("The user isn't the owner of this task!");
         }
@@ -112,7 +111,7 @@ public class TasksService {
 
     @Transactional
     public void deleteById(Long userID, UUID id){
-        userRepository.findById(userID)
+        usersRepository.findById(userID)
                 .orElseThrow(() -> new EntityNotFoundException("User doesn't exist"));
 
         tasksRepository.findById(id)
