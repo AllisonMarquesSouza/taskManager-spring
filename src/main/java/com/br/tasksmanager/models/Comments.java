@@ -1,7 +1,9 @@
 package com.br.tasksmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.UUID;
 @Table(name = "comments")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,10 +21,12 @@ public class Comments {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Users user;
 
     @ManyToOne
     @JoinColumn(name = "task_id")
+    @JsonIgnore
     private Tasks task;
 
     @Column(name = "comment_text")
@@ -30,4 +35,9 @@ public class Comments {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    public Comments(Users user, Tasks task, String comment){
+        this.user = user;
+        this.task = task;
+        this.comment = comment;
+    }
 }
