@@ -4,6 +4,8 @@ import com.br.tasksmanager.Enums.TaskPriority;
 import com.br.tasksmanager.Enums.TaskStatus;
 import com.br.tasksmanager.dtos.Tasks.TaskRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -50,6 +53,11 @@ public class Tasks {
 
     @Column(name = "update_at")
     private LocalDateTime updateAt;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnoreProperties({"id"})
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
+    private List<Comments> comments;
 
     public Tasks(Users user, TaskRequestDto requestDto){
         this.user = user;
