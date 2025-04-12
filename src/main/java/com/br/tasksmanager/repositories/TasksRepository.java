@@ -15,7 +15,7 @@ public interface TasksRepository extends JpaRepository<Tasks, UUID> {
     boolean existsByUserIdAndId(Long userId, UUID id);
 
     @Query(value = """
-        SELECT * FROM "task-manager".public.tasks t
+        SELECT * FROM "taskmanager".public.tasks t
         WHERE  t.user_id = :userId
             AND (:name IS NULL OR t.name LIKE CONCAT('%', :name, '%'))
             AND (:description IS NULL OR t.description LIKE CONCAT('%', :description, '%'))
@@ -27,4 +27,19 @@ public interface TasksRepository extends JpaRepository<Tasks, UUID> {
                        @Param("description") String description,
                        @Param("priority") String priority,
                        @Param("status") String status);
+
+    @Query(value = """
+        SELECT * FROM tasks t
+        WHERE  t.user_id = :userId
+            AND (:name IS NULL OR t.name LIKE CONCAT('%', :name, '%'))
+            AND (:description IS NULL OR t.description LIKE CONCAT('%', :description, '%'))
+            AND (:priority IS NULL OR t.priority LIKE CONCAT('%', :priority, '%'))
+            AND (:status IS NULL OR t.status LIKE CONCAT('%', :status, '%'))""",
+            nativeQuery = true)
+    List<Tasks> filterForH2test(@Param("userId") Long userId,
+                            @Param("name") String name,
+                            @Param("description") String description,
+                            @Param("priority") String priority,
+                            @Param("status") String status);
+
 }

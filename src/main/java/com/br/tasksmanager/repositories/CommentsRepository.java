@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface CommentsRepository extends JpaRepository<Comments, UUID> {
     List<Comments> findAllByTask_Id(UUID taskId);
     List<Comments> findAllByUser_Id(Long userId);
-    boolean existsByUser_IdAndId(Long userId, UUID id);
+    boolean existsByUser_IdAndId(Long userId, UUID commentId);
 }

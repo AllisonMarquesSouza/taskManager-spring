@@ -31,8 +31,8 @@ public class TasksService {
         return tasksRepository.findAllByUserId(id);
     }
 
-    public List<Tasks> filterByUserIdAndNameTaskNative(Long id, String name, String description,
-                                                       String priority, String status){
+    public List<Tasks> filter(Long id, String name, String description,
+                              String priority, String status){
         return tasksRepository.filter(id, name, description, priority, status);
     }
 
