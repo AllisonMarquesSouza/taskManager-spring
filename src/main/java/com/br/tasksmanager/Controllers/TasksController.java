@@ -34,7 +34,7 @@ public class TasksController {
                                                                        @RequestParam(required = false) String description,
                                                                        @RequestParam(required = false) String priority,
                                                                        @RequestParam(required = false) String status){
-        return ResponseEntity.ok(tasksService.filterByUserIdAndNameTaskNative(userId, name, description, priority, status));
+        return ResponseEntity.ok(tasksService.filter(userId, name, description, priority, status));
     }
 
     @PostMapping("/create")

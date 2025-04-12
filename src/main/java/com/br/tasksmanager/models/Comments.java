@@ -2,18 +2,17 @@ package com.br.tasksmanager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "comments")
-@Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

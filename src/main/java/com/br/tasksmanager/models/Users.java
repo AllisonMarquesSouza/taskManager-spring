@@ -2,8 +2,7 @@ package com.br.tasksmanager.models;
 
 import com.br.tasksmanager.Enums.UserRole;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Getter
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
