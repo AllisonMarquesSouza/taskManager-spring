@@ -49,7 +49,7 @@ public class TasksService {
     }
 
     //updates
-    private Tasks checkUserAndGetTasks(Long userId, UUID taskId) {
+    Tasks checkUserAndGetTasks(Long userId, UUID taskId) {
         usersRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User doesn't exist, check it"));
         Tasks task = tasksRepository.findById(taskId)
@@ -110,17 +110,8 @@ public class TasksService {
 
 
     @Transactional
-    public void deleteById(Long userID, UUID id){
-        usersRepository.findById(userID)
-                .orElseThrow(() -> new EntityNotFoundException("User doesn't exist"));
-
-        tasksRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Task doesn't exist"));
-
-        if(tasksRepository.existsByUserIdAndId(userID, id)){
-            tasksRepository.deleteById(id);
-            return;
-        }
-        throw new BadRequestException("The user isn't the owner of this task!");
+    public void deleteById(Long userID, UUID taskId){
+        checkUserAndGetTasks(userID, taskId);
+        tasksRepository.deleteById(taskId);
     }
 }

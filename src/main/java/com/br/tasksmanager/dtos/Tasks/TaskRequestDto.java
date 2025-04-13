@@ -6,9 +6,10 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
 import java.time.LocalDate;
-
+@Builder
 public record TaskRequestDto(
         @NotNull(message = "The userId can't be null")
         Long userId,
