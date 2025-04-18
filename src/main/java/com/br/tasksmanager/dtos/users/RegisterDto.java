@@ -2,7 +2,9 @@ package com.br.tasksmanager.dtos.users;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 
+@Builder
 public record RegisterDto(
         @NotBlank(message = "The username can't be blank")
         String username,
