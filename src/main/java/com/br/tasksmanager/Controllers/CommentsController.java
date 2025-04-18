@@ -19,11 +19,6 @@ import java.util.UUID;
 public class CommentsController {
     private final CommentsService commentsService;
 
-    @GetMapping("/getAllByTaskId/{taskId}")
-    public ResponseEntity<List<Comments>> getAllByTaskId(@PathVariable("taskId") UUID taskId){
-        return ResponseEntity.ok(commentsService.findAllByTaskId(taskId));
-    }
-
     @GetMapping("/getAllByUserId/{userId}")
     public ResponseEntity<List<Comments>> getAllByUserId(@PathVariable("userId") Long userId){
         return ResponseEntity.ok(commentsService.findAllByUserId(userId));

@@ -25,9 +25,6 @@ public class CommentsService {
     private final UsersRepository usersRepository;
     private final TasksRepository tasksRepository;
 
-    public List<Comments> findAllByTaskId(UUID taskId){
-        return commentsRepository.findAllByTask_Id(taskId);
-    }
     public List<Comments> findAllByUserId(Long userId){
         return commentsRepository.findAllByUser_Id(userId);
     }

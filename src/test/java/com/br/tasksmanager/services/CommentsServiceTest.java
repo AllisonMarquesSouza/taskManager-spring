@@ -42,23 +42,6 @@ class CommentsServiceTest {
     private CommentsService commentsService;
 
     @Test
-    void findAllByTaskId_ExistingComments_ReturnsComments() {
-        Users user = UsersCreate.createUser();
-        Tasks task = TasksCreate.createTask(user);
-        Comments comment = CommentsCreate.createComment(user, task);
-        Comments comment2 = CommentsCreate.createComment2(user, task);
-
-        when(commentsRepository.findAllByTask_Id(task.getId()))
-                .thenReturn(List.of(comment, comment2));
-
-        List<Comments> allCommentsByTaskId = commentsService.findAllByTaskId(task.getId());
-
-        assertEquals(2, allCommentsByTaskId.size());
-        assertEquals(comment, allCommentsByTaskId.getFirst());
-        assertEquals(comment2, allCommentsByTaskId.getLast());
-    }
-
-    @Test
     void findAllByUserId_ExistingComments_ReturnsComments() {
         Users user = UsersCreate.createUser();
         Tasks task = TasksCreate.createTask(user);
