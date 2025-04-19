@@ -54,7 +54,7 @@ public class AuthenticationService implements UserDetailsService {
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Users user = new Users(data.username(), encryptedPassword, data.email(), UserRole.ADMIN);
+        Users user = new Users(data.username(), encryptedPassword, data.email(), UserRole.USER);
         return usersRepository.save(user);
     }
 }
