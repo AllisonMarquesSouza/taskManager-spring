@@ -3,16 +3,14 @@
 
 A **RESTful API** built with **Java + Spring Boot**, designed to manage tasks and comments. Users can register, log in, and perform task operations such as create, update, filter, and delete — all with simple endpoints.
 
----
-
 ## 🚀 Overview
 
 **Version:** 1.0  
 **API Spec:** OpenAPI 3.0 (OAS 3.0)  
 **Docs:** `/v3/api-docs`  
-**Purpose:** API to manage personal or team tasks efficiently.  
+**Purpose:** API to manage personal tasks efficiently.  
 
----
+
 
 
 ## 🌍 Deployment
@@ -21,20 +19,14 @@ The application is deployed at:
 
 **🔗 Live API URL:** https://taskmanager-spring-4rt7.onrender.com/swagger-ui/index.html#/
 
----
-
 ## 📬 Contact
 
 - **Email:** allisonsouza10261@gmail.com
 
----
 
 ## 📄 License
 
 This project is licensed under the terms of your choice.
-
----
-
 ## 🛠️ Technologies Used
 
 - Java 17+
@@ -48,8 +40,6 @@ This project is licensed under the terms of your choice.
 - Lombok
 - Swagger / OpenAPI
 
----
-
 ## 🧱 Folder Structure
 ```
 src/
@@ -62,7 +52,6 @@ src/
 ├── security
 └── exception
 ```
----
 
 ## 🔐 Authentication
 
@@ -70,8 +59,6 @@ src/
 |--------|------------------|------------------------------------|
 | POST   | `/auth/register` | Create your account                |
 | POST   | `/auth/login`    | Log in with username and password  |
-
----
 
 ## 📋 Tasks Endpoints
 
@@ -89,7 +76,6 @@ src/
 | GET    | `/tasks/filter/{userId}`                           | Filter tasks (by name, status...) |
 | DELETE | `/tasks/delete/{userId}/{taskId}`                  | Delete task                       |
 
----
 
 ## 💬 Comments Endpoints
 
@@ -100,8 +86,6 @@ src/
 | GET    | `/comments/getAllByUserId/{userId}`                 | Get all comments by user ID         |
 | DELETE | `/comments/delete/{userId}/{commentId}`             | Delete a comment                    |
 
----
-
 ## 🔐 Authorization
 
 JWT-based security is implemented. Use the `Authorize` button in Swagger UI or attach the token in headers like this:
@@ -109,8 +93,6 @@ JWT-based security is implemented. Use the `Authorize` button in Swagger UI or a
 ```
 Authorization: Bearer <your_token_here>
 ```
-
----
 
 ## 📝 Swagger Documentation
 
@@ -126,8 +108,6 @@ You can also use **Swagger UI** (if added) at:
 /swagger-ui.html
 ```
 
----
-
 ## ✅ Future Improvements
 
 - Pagination for task lists
@@ -135,7 +115,6 @@ You can also use **Swagger UI** (if added) at:
 - Comment reactions
 - Admin dashboard
 
----
 
 ## 📌 How to Run Locally
 
@@ -150,7 +129,6 @@ cd task-manager-api
 
 Before you run, make sure you set your database credentials in `application.properties`.
 
----
 
 ## 📂 Database Tables
 
@@ -158,7 +136,6 @@ Before you run, make sure you set your database credentials in `application.prop
 - `tasks`
 - `comments`
 
----
 
 ## 📎 Contributing
 
