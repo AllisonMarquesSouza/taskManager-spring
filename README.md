@@ -43,14 +43,14 @@ This project is licensed under the terms of your choice.
 ## 🧱 Folder Structure
 ```
 src/
-├── controller
+├── controllers
 ├── service
 ├── repository
 ├── model
-├── dto
+├── enums
+├── dtos
 ├── config
-├── security
-└── exception
+└── exceptions
 ```
 
 ## 🔐 Authentication
