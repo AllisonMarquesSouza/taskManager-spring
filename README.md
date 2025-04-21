@@ -1,8 +1,4 @@
-Perfect! Here's a full **GitHub-style documentation** for your **Task Manager API** project. It's clean, professional, and ready to be added to a `README.md`. There's a section where you can add your **deployment link** when it's ready.
 
----
-
-```markdown
 # ✅ Task Manager API
 
 A **RESTful API** built with **Java + Spring Boot**, designed to manage tasks and comments. Users can register, log in, and perform task operations such as create, update, filter, and delete — all with simple endpoints.
@@ -17,6 +13,7 @@ A **RESTful API** built with **Java + Spring Boot**, designed to manage tasks an
 **Purpose:** API to manage personal or team tasks efficiently.  
 
 ---
+
 
 ## 🌍 Deployment
 
@@ -54,7 +51,6 @@ This project is licensed under the terms of your choice.
 ---
 
 ## 🧱 Folder Structure
-
 ```
 src/
 ├── controller
@@ -66,7 +62,6 @@ src/
 ├── security
 └── exception
 ```
-
 ---
 
 ## 🔐 Authentication
